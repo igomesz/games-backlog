@@ -19,6 +19,8 @@ public class Main {
 //        gameDAO.insert(game2);
 
         GameDAO gameDAO = new GameDAO();
+        gameDAO.deleteById(6);
+
         List<Game> gamesList = gameDAO.findAll();
         for (Game game : gamesList){
             System.out.println(game);

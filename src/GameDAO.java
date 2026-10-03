@@ -47,6 +47,19 @@ public class GameDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public void deleteById(Integer id){
+        try{
+            PreparedStatement st = DB.getConnection().prepareStatement(
+                    "DELETE FROM jogos WHERE id = ?"
+            );
+
+            st.setInt(1,id);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
