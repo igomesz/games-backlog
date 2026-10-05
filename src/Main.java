@@ -5,11 +5,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-//        DB.getConnection();
-//        if (DB.getConnection() != null){
-//            System.out.println("Conectado");
-//        }
-//
+        DB.getConnection();
+        if (DB.getConnection() != null){
+            System.out.println("Conectado");
+        }
+
 //        Game game1 = new Game(null,"Blasphemous2", "Metroidvania", 29.9, "Em progresso");
 //        GameDAO gameDAO = new GameDAO();
 //        gameDAO.insert(game1);
@@ -19,7 +19,10 @@ public class Main {
 //        gameDAO.insert(game2);
 
         GameDAO gameDAO = new GameDAO();
-        gameDAO.deleteById(6);
+        gameDAO.deleteById(7);
+
+        gameDAO = new GameDAO();
+        gameDAO.update(new Game(8,"GTA5", "Acao", 42.5, "Em progresso"));
 
         List<Game> gamesList = gameDAO.findAll();
         for (Game game : gamesList){

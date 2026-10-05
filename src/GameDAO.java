@@ -6,11 +6,11 @@ import java.util.List;
 
 public class GameDAO {
 
-    public void insert(Game game){
+    public void insert(Game game) {
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
                     "INSERT INTO jogos (nome, estilo, horas, status)" +
-                        "VALUES (?,?,?,?)"
+                            "VALUES (?,?,?,?)"
             );
 
             st.setString(1, game.getName());
@@ -25,7 +25,7 @@ public class GameDAO {
         }
     }
 
-    public List<Game> findAll(){
+    public List<Game> findAll() {
         List<Game> list = new ArrayList<>();
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
@@ -33,13 +33,13 @@ public class GameDAO {
             );
 
             ResultSet rs = st.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Game game = new Game(
-                rs.getInt("id"),
-                rs.getString("nome"),
-                rs.getString("estilo"),
-                rs.getDouble("horas"),
-                rs.getString("Status")
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("estilo"),
+                        rs.getDouble("horas"),
+                        rs.getString("Status")
                 );
                 list.add(game);
             }
@@ -49,13 +49,29 @@ public class GameDAO {
         }
     }
 
-    public void deleteById(Integer id){
-        try{
+    public void deleteById(Integer id) {
+        try {
             PreparedStatement st = DB.getConnection().prepareStatement(
                     "DELETE FROM jogos WHERE id = ?"
             );
 
-            st.setInt(1,id);
+            st.setInt(1, id);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update(Game game) {
+        try {
+            PreparedStatement st = DB.getConnection().prepareStatement(
+                    "UPDATE jogos SET status = ? WHERE id = ?"
+            );
+
+            st.setString(1, game.getStatus());
+            st.setInt(2, game.getId());
+
             st.executeUpdate();
 
         } catch (SQLException e) {
