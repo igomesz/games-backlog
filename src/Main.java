@@ -1,8 +1,6 @@
 import java.sql.SQLOutput;
 import java.util.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
@@ -17,17 +15,21 @@ public class Main {
             System.out.println("3 - Sair");
             n = sc.nextInt();
 
-            switch (n){
+            switch (n) {
 
-                case 1 :
+                case 1:
+                    break;
+
+                case 2:
+                    GameDAO gameDAO = new GameDAO();
+                    List<Game> gamesList = gameDAO.findAll();
+                    for (Game game : gamesList) {
+                        System.out.println(game);
+                    }
+                    break;
 
 
-
-                case 2 :
-
-
-
-                case 3 :
+                case 3:
                     System.out.println("Encerrando...");
                     break;
 
@@ -58,10 +60,7 @@ public class Main {
 ////        gameDAO = new GameDAO();
 ////        gameDAO.update(new Game(8, "GTA5", "Acao", 42.5, "Em progresso"));
 ////
-////        List<Game> gamesList = gameDAO.findAll();
-////        for (Game game : gamesList) {
-////            System.out.println(game);
-////        }
+
 //
 //        gameDAO = new GameDAO();
 //        List<Game> listGame = gameDAO.findAll();
