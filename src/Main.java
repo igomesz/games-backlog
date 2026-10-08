@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        GameDAO gameDAO = new GameDAO();
 
         int n = 0;
         while (n != 3) {
@@ -18,19 +19,34 @@ public class Main {
             switch (n) {
 
                 case 1:
+                    System.out.println("\n================================= CADASTRO DE JOGO =================================");
+                    sc.nextLine();
+                    System.out.print("Qual nome do jogo? ");
+                    String name = sc.nextLine();
+                    System.out.print("Qual o estilo do jogo? ");
+                    String style = sc.nextLine();
+                    System.out.print("Quantas horas jogadas? ");
+                    Double hoursPlayed = sc.nextDouble();
+                    sc.nextLine();
+                    System.out.print("Qual o status do jogo? ");
+                    String status = sc.nextLine();
+                    Game game = new Game(null, name, style, hoursPlayed, status);
+                    gameDAO.insert(game);
+                    System.out.println("=====================================================================================\n");
                     break;
 
                 case 2:
-                    GameDAO gameDAO = new GameDAO();
+                    System.out.println("\n================================= LISTAGEM DE JOGOS =================================");
                     List<Game> gamesList = gameDAO.findAll();
-                    for (Game game : gamesList) {
-                        System.out.println(game);
+                    for (Game games : gamesList) {
+                        System.out.println(games);
                     }
+                    System.out.println("======================================================================================\n");
                     break;
 
 
                 case 3:
-                    System.out.println("Encerrando...");
+                    System.out.println("\n================================= ENCERRANDO... =================================");
                     break;
 
                 default:
