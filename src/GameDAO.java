@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GameDAO {
 
-    public void insert(Game game) {
+    public static void insert(Game game) {
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
                     "INSERT INTO jogos (nome, estilo, horas, status)" +
@@ -25,7 +25,7 @@ public class GameDAO {
         }
     }
 
-    public List<Game> findAll() {
+    public static List<Game> findAll() {
         List<Game> list = new ArrayList<>();
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
