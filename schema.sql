@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS backlog;
+
+USE backlog;
+
+CREATE TABLE IF NOT EXISTS jogos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50),
+    estilo VARCHAR(100),
+    horas DOUBLE,
+    status VARCHAR(50)
+);

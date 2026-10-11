@@ -1,0 +1,3 @@
+user=root
+password=coloque_sua_senha_aqui
+dburl=jdbc:mysql://127.0.0.1:3306/backlog
