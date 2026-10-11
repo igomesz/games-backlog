@@ -9,8 +9,8 @@ public class GameDAO {
     public static void insert(Game game) {
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
-                    "INSERT INTO jogos (nome, estilo, horas, status)" +
-                            "VALUES (?,?,?,?)"
+                    "INSERT INTO jogos (nome, estilo, horas, status) "
+                            + "VALUES (?,?,?,?)"
             );
 
             st.setString(1, game.getName());
@@ -39,7 +39,7 @@ public class GameDAO {
                         rs.getString("nome"),
                         rs.getString("estilo"),
                         rs.getDouble("horas"),
-                        rs.getString("Status")
+                        rs.getString("status")
                 );
                 list.add(game);
             }
@@ -49,7 +49,7 @@ public class GameDAO {
         }
     }
 
-    public void deleteById(Integer id) {
+    public static void deleteById(Integer id) {
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
                     "DELETE FROM jogos WHERE id = ?"
@@ -63,7 +63,7 @@ public class GameDAO {
         }
     }
 
-    public void update(Game game) {
+    public static void update(Game game) {
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
                     "UPDATE jogos SET status = ? WHERE id = ?"
