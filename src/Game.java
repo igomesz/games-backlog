@@ -59,12 +59,10 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Games{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", style='" + style + '\'' +
-                ", hoursPlayed=" + hoursPlayed +
-                ", status='" + status + '\'' +
-                '}';
+        return "ID = " + id +
+                " | Nome = " + name +
+                " | Style = " + style +
+                " | Hours Played = " + hoursPlayed +
+                " | Status = " + status;
     }
 }
