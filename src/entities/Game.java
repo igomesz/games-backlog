@@ -1,3 +1,5 @@
+package entities;
+
 public class Game {
 
     private Integer id;

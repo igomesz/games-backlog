@@ -1,3 +1,8 @@
+package dao;
+
+import db.DB;
+import entities.Game;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

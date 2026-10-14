@@ -1,3 +1,8 @@
+package application;
+
+import dao.GameDAO;
+import entities.Game;
+
 import java.util.*;
 
 public class Main {
