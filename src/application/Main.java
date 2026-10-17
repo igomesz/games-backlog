@@ -48,8 +48,7 @@ public class Main {
                     String name = sc.nextLine();
                     System.out.print("Qual o estilo do jogo? ");
                     String style = sc.nextLine();
-                    System.out.print("Quantas horas jogadas? ");
-                    Double hoursPlayed = sc.nextDouble();
+                    Double hoursPlayed = readDouble(sc, "Quantas horas jogadas? ");
                     sc.nextLine();
                     System.out.print("Qual o status do jogo? ");
                     String status = sc.nextLine();
@@ -143,6 +142,18 @@ public class Main {
             System.out.print(message);
             try {
                 return sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Digite um numero!");
+                sc.nextLine();
+            }
+        }
+    }
+
+    private static Double readDouble (Scanner sc, String message){
+        while (true){
+            System.out.print(message);
+            try {
+                return sc.nextDouble();
             } catch (InputMismatchException e) {
                 System.out.println("Digite um numero!");
                 sc.nextLine();
