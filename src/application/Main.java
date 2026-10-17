@@ -28,6 +28,7 @@ public class Main {
                 System.out.println("7 - Deletar por Id");
                 System.out.print("Digite: ");
                 n = sc.nextInt();
+                sc.nextLine();
             } catch (Exception e) {
                 System.out.println("Digite um numero!");
                 sc.nextLine();
@@ -43,15 +44,13 @@ public class Main {
 
                 case 1:
                     System.out.println("\n================================= CADASTRO DE JOGO =================================");
-                    sc.nextLine();
                     System.out.print("Qual nome do jogo? ");
                     String name = sc.nextLine();
                     System.out.print("Qual o estilo do jogo? ");
-                    String style = sc.nextLine();
+                    String style = capitalize(sc.nextLine());
                     Double hoursPlayed = readDouble(sc, "Quantas horas jogadas? ");
                     sc.nextLine();
-                    System.out.print("Qual o status do jogo? ");
-                    String status = sc.nextLine();
+                    String status = readStatus(sc, "Quero jogar | Em progresso | Zerado \nQual status do jogo?  ");
                     Game game = new Game(null, name, style, hoursPlayed, status);
                     GameDAO.insert(game);
                     System.out.println("=====================================================================================\n");
@@ -65,10 +64,8 @@ public class Main {
 
                 case 3:
                     System.out.println("\n================================= FILTRAR POR STATUS =================================");
-                    System.out.println("Zerado / Em progresso");
-                    System.out.print("Digite um status: ");
-                    sc.nextLine();
-                    String statusGame = sc.nextLine();
+                    System.out.println("Quero jogar | Em progresso | Zerado:");
+                    String statusGame = readStatus(sc, "Qual status voce quer filtrar? ");
                     System.out.println();
                     List<Game> allGames = GameDAO.findAll();
                     List<Game> listFilter = allGames.stream().filter(game1 -> game1.getStatus()
@@ -106,9 +103,8 @@ public class Main {
                     System.out.println("\n================================= ATUALIZAR STATUS =================================");
                     printGames(GameDAO.findAll());
                     int id = readInt(sc,"Qual ID voce quer atualizar? ");
-                    System.out.print("Zerado / Em progresso: ");
                     sc.nextLine();
-                    String statusUpdate = sc.nextLine();
+                    String statusUpdate = readStatus(sc, "Quero jogar | Em progresso | Zerado: ");
                     Game gameUpdate = new Game(id, null, null, null, statusUpdate);
                     GameDAO.update(gameUpdate);
                     System.out.println("=====================================================================================\n");
@@ -159,6 +155,27 @@ public class Main {
                 sc.nextLine();
             }
         }
+    }
+
+    private static String readStatus (Scanner sc, String message){
+        while (true){
+            System.out.print(message);
+            String status = capitalize(sc.nextLine());
+            switch (status){
+                case "Quero jogar", "Em progresso" , "Zerado" -> {
+                    return status;
+                }
+                default -> System.out.println("Escolha um status valido!\nQuero jogar | Em progresso | Zerado\n");
+            }
+        }
+    }
+
+    private static String capitalize (String text){
+        if (text == null || text.isBlank()){
+            return text;
+        }
+        text = text.trim();
+        return text.substring(0, 1).toUpperCase() + text.substring(1);
     }
 
 }
