@@ -106,8 +106,7 @@ public class Main {
                 case 6:
                     System.out.println("\n================================= ATUALIZAR STATUS =================================");
                     printGames(GameDAO.findAll());
-                    System.out.print("Qual id voce quer atualizar? ");
-                    int id = sc.nextInt();
+                    int id = readInt(sc,"Qual ID voce quer atualizar? ");
                     System.out.print("Zerado / Em progresso: ");
                     sc.nextLine();
                     String statusUpdate = sc.nextLine();
@@ -117,11 +116,9 @@ public class Main {
                     break;
 
                 case 7:
-                    System.out.println("\n=====" +
-                            "============================ DELETAR POR ID =================================");
+                    System.out.println("\n================================= DELETAR POR ID =================================");
                     printGames(GameDAO.findAll());
-                    System.out.print("Digita o Id que voce quer deletar: ");
-                    int deleteNumber = sc.nextInt();
+                    int deleteNumber = readInt(sc, "Qual ID voce quer deletar? ");
                     GameDAO.deleteById(deleteNumber);
                     System.out.println("=====================================================================================\n");
                     break;
@@ -138,6 +135,18 @@ public class Main {
     private static void printGames (List<Game> findGames){
         for (Game games : findGames){
             System.out.println(games);
+        }
+    }
+
+    private static int readInt (Scanner sc, String message){
+        while (true){
+            System.out.print(message);
+            try {
+                return sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Digite um numero!");
+                sc.nextLine();
+            }
         }
     }
 
