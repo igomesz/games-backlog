@@ -60,10 +60,7 @@ public class Main {
 
                 case 2:
                     System.out.println("\n================================= LISTAGEM DE JOGOS =================================");
-                    List<Game> gamesList = GameDAO.findAll();
-                    for (Game games : gamesList) {
-                        System.out.println(games);
-                    }
+                    printGames(GameDAO.findAll());
                     System.out.println("======================================================================================\n");
                     break;
 
@@ -75,10 +72,10 @@ public class Main {
                     String statusGame = sc.nextLine();
                     System.out.println();
                     List<Game> allGames = GameDAO.findAll();
-                    List<Game> listFilter = allGames.stream().filter(game1 -> game1.getStatus().equalsIgnoreCase(statusGame)).toList();
-                    for (Game gameFilter : listFilter) {
-                        System.out.println(gameFilter);
-                    }
+                    List<Game> listFilter = allGames.stream().filter(game1 -> game1.getStatus()
+                            .equalsIgnoreCase(statusGame))
+                            .toList();
+                    printGames(listFilter);
                     System.out.println("=====================================================================================\n");
                     break;
 
@@ -108,10 +105,7 @@ public class Main {
 
                 case 6:
                     System.out.println("\n================================= ATUALIZAR STATUS =================================");
-                    List<Game> updateList = GameDAO.findAll();
-                    for (Game games : updateList) {
-                        System.out.println(games);
-                    }
+                    printGames(GameDAO.findAll());
                     System.out.print("Qual id voce quer atualizar? ");
                     int id = sc.nextInt();
                     System.out.print("Zerado / Em progresso: ");
@@ -123,11 +117,9 @@ public class Main {
                     break;
 
                 case 7:
-                    System.out.println("\n================================= DELETAR POR ID =================================");
-                    List<Game> deleteList = GameDAO.findAll();
-                    for (Game games : deleteList) {
-                        System.out.println(games);
-                    }
+                    System.out.println("\n=====" +
+                            "============================ DELETAR POR ID =================================");
+                    printGames(GameDAO.findAll());
                     System.out.print("Digita o Id que voce quer deletar: ");
                     int deleteNumber = sc.nextInt();
                     GameDAO.deleteById(deleteNumber);
@@ -141,6 +133,12 @@ public class Main {
 
         }
 
+    }
+
+    private static void printGames (List<Game> findGames){
+        for (Game games : findGames){
+            System.out.println(games);
+        }
     }
 
 }
