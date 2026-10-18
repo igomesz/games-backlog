@@ -69,14 +69,14 @@ public class GameDAO {
         }
     }
 
-    public static int update(Game game) {
+    public static int update(String statusUpdate, int id) {
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
                     "UPDATE jogos SET status = ? WHERE id = ?"
             );
 
-            st.setString(1, game.getStatus());
-            st.setInt(2, game.getId());
+            st.setString(1, statusUpdate);
+            st.setInt(2, id);
 
             int rowsAffected = st.executeUpdate();
             return rowsAffected;

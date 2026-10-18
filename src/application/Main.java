@@ -108,8 +108,7 @@ public class Main {
                     boolean exist = listGames.stream().anyMatch(g-> g.getId() == id);
                     if (exist){
                         String statusUpdate = readStatus(sc, "Quero jogar | Em progresso | Zerado: ");
-                        Game gameUpdate = new Game(id, null, null, null, statusUpdate);
-                        GameDAO.update(gameUpdate);
+                        GameDAO.update(statusUpdate, id);
                         System.out.println("Jogo ID:" + id + " atualizado.");
                     } else {
                         System.out.println("Nao existe esse ID.");
