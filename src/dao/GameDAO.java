@@ -54,21 +54,22 @@ public class GameDAO {
         }
     }
 
-    public static void deleteById(Integer id) {
+    public static int deleteById(Integer id) {
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
                     "DELETE FROM jogos WHERE id = ?"
             );
 
             st.setInt(1, id);
-            st.executeUpdate();
+            int rowsAffected = st.executeUpdate();
+            return rowsAffected;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void update(Game game) {
+    public static int update(Game game) {
         try {
             PreparedStatement st = DB.getConnection().prepareStatement(
                     "UPDATE jogos SET status = ? WHERE id = ?"
@@ -77,7 +78,8 @@ public class GameDAO {
             st.setString(1, game.getStatus());
             st.setInt(2, game.getId());
 
-            st.executeUpdate();
+            int rowsAffected = st.executeUpdate();
+            return rowsAffected;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

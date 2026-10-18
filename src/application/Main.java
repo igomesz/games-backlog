@@ -101,12 +101,19 @@ public class Main {
 
                 case 6:
                     System.out.println("\n================================= ATUALIZAR STATUS =================================");
-                    printGames(GameDAO.findAll());
+                    List<Game> listGames = GameDAO.findAll();
+                    printGames(listGames);
                     int id = readInt(sc,"Qual ID voce quer atualizar? ");
                     sc.nextLine();
-                    String statusUpdate = readStatus(sc, "Quero jogar | Em progresso | Zerado: ");
-                    Game gameUpdate = new Game(id, null, null, null, statusUpdate);
-                    GameDAO.update(gameUpdate);
+                    boolean exist = listGames.stream().anyMatch(g-> g.getId() == id);
+                    if (exist){
+                        String statusUpdate = readStatus(sc, "Quero jogar | Em progresso | Zerado: ");
+                        Game gameUpdate = new Game(id, null, null, null, statusUpdate);
+                        GameDAO.update(gameUpdate);
+                        System.out.println("Jogo ID:" + id + " atualizado.");
+                    } else {
+                        System.out.println("Nao existe esse ID.");
+                    }
                     System.out.println("=====================================================================================\n");
                     break;
 
@@ -114,7 +121,11 @@ public class Main {
                     System.out.println("\n================================= DELETAR POR ID =================================");
                     printGames(GameDAO.findAll());
                     int deleteNumber = readInt(sc, "Qual ID voce quer deletar? ");
-                    GameDAO.deleteById(deleteNumber);
+                    if (GameDAO.deleteById(deleteNumber) > 0){
+                        System.out.println("Jogo ID:" + deleteNumber + " deletado.");
+                    } else {
+                        System.out.println("Nao existe esse ID.");
+                    }
                     System.out.println("=====================================================================================\n");
                     break;
 
