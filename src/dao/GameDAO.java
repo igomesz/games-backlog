@@ -1,6 +1,7 @@
 package dao;
 
 import db.DB;
+import db.DbException;
 import entities.Game;
 
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class GameDAO {
             st.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException(e.getMessage());
         }
     }
 
@@ -50,7 +51,7 @@ public class GameDAO {
             }
             return list;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException(e.getMessage());
         }
     }
 
@@ -65,7 +66,7 @@ public class GameDAO {
             return rowsAffected;
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException(e.getMessage());
         }
     }
 
@@ -82,7 +83,7 @@ public class GameDAO {
             return rowsAffected;
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException(e.getMessage());
         }
     }
 }
