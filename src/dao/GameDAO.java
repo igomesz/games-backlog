@@ -13,11 +13,9 @@ import java.util.List;
 public class GameDAO {
 
     public static void insert(Game game) {
-        try {
-            PreparedStatement st = DB.getConnection().prepareStatement(
-                    "INSERT INTO jogos (nome, estilo, horas, status) "
-                            + "VALUES (?,?,?,?)"
-            );
+        try (PreparedStatement st = DB.getConnection().prepareStatement(
+                "INSERT INTO jogos (nome, estilo, horas, status) "
+                        + "VALUES (?,?,?,?)")){
 
             st.setString(1, game.getName());
             st.setString(2, game.getStyle());
@@ -33,12 +31,12 @@ public class GameDAO {
 
     public static List<Game> findAll() {
         List<Game> list = new ArrayList<>();
-        try {
-            PreparedStatement st = DB.getConnection().prepareStatement(
-                    "SELECT * FROM jogos"
-            );
+        try (PreparedStatement st = DB.getConnection().prepareStatement(
+                "SELECT * FROM jogos"
+        );
+             ResultSet rs = st.executeQuery();
+        ){
 
-            ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Game game = new Game(
                         rs.getInt("id"),
@@ -56,10 +54,8 @@ public class GameDAO {
     }
 
     public static int deleteById(Integer id) {
-        try {
-            PreparedStatement st = DB.getConnection().prepareStatement(
-                    "DELETE FROM jogos WHERE id = ?"
-            );
+        try (PreparedStatement st = DB.getConnection().prepareStatement(
+                    "DELETE FROM jogos WHERE id = ?")){
 
             st.setInt(1, id);
             int rowsAffected = st.executeUpdate();
@@ -71,10 +67,8 @@ public class GameDAO {
     }
 
     public static int update(String statusUpdate, int id) {
-        try {
-            PreparedStatement st = DB.getConnection().prepareStatement(
-                    "UPDATE jogos SET status = ? WHERE id = ?"
-            );
+        try (PreparedStatement st = DB.getConnection().prepareStatement(
+                    "UPDATE jogos SET status = ? WHERE id = ?")){
 
             st.setString(1, statusUpdate);
             st.setInt(2, id);
