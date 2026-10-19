@@ -32,7 +32,7 @@ public class Main {
                     System.out.print("Digite: ");
                     n = sc.nextInt();
                     sc.nextLine();
-                } catch (Exception e) {
+                } catch (InputMismatchException e) {
                     System.out.println("Digite um numero!");
                     sc.nextLine();
                     continue;
